@@ -7,7 +7,7 @@ import json
 
 
 def mysql_connection():
-    conn = pymysql.connect('localhost', 'root', 'bcbcslcj0310', 'uq_robot_receptionist', charset='utf8')
+    conn = pymysql.connect('localhost', 'root', '19941005', 'uq_robot_receptionist', charset='utf8')
     cur = conn.cursor()
     # Error: UnicodeEncodeError: 'latin-1' codec can't encode character
     cur.execute('SET NAMES utf8;')
