@@ -211,9 +211,11 @@ def process_general_question(original_question):
 def process_request(intent_type, parameter, original_question, context):
     if intent_type == 'ProgramOverview_Domestic':
         title, result = fetchDomesticProgramOverview(parameter)
-        if result is None:
-            result = 'Sorry, the answer is not available'
-        return result
+        if result is not None:
+            return result
+        elif result is None:
+            result == 'Sorry, the answer is not available.'
+            return result
     elif intent_type == 'ProgramOverview_International':
         title, result = fetchInternationalProgramOverview(parameter)
         return result
@@ -228,57 +230,41 @@ def process_request(intent_type, parameter, original_question, context):
         if result is not None:
             result = 'The entry requirements of ' + title + ' is: ' + result
         return result
-        else:
-            result == 'Sorry, the answer is not available.'
     elif intent_type == 'ProgramRequirement_International':
         title, result = fetchInternationalProgramEntryRequirement(parameter)
         if result is not None:
             result = 'The entry requirements of ' + title + ' is: ' + result
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        return result
     elif intent_type == 'ProgramFee_Domestic':
         title, result = fetchDomesticProgramFee(parameter)
         if result is not None:
             result = 'The cost of ' + title + ' is: ' + result + ' dollar per year'
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        return result
     elif intent_type == 'ProgramFee_International':
         title, result = fetchInternationalProgramFee(parameter)
         if result is not None:
             result = 'The cost of ' + title + ' is: ' + result + ' dollar per year'
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        return result
     elif intent_type == 'ProgramFaculty_Domestic':
         title, result = fetchDomesticProgramFaculty(parameter)
         if result is not None:
             result = 'The duration of ' + title + ' is: ' + result
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        return result
     elif intent_type == 'ProgramFaculty_International':
         title, result = fetchInternationalProgramFaculty(parameter)
         if result is not None:
             result = 'The duration of ' + title + ' is: ' + result
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        return result
     elif intent_type == 'ProgramDuration_Domestic':
         title, result = fetchDomesticProgramDuration(parameter)
         if result is not None:
             result = 'The duration of ' + title + ' is: ' + result
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        return result
     elif intent_type == 'ProgramDuration_International':
         title, result = fetchInternationalProgramDuration(parameter)
         if result is not None:
             result = 'The duration of ' + title + ' is: ' + result
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        return result
     else:
         return "Sorry, currently we do not have such service"
 
