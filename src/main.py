@@ -90,7 +90,7 @@ def getValueFromJsonParameter(parameter):
 def fetchDomesticProgramInfoFromDB(title, column_name):
     conn = mysql_connection()
     cur = conn.cursor(pymysql.cursors.DictCursor)
-    sql = "select * from domestic_Program where title = %S" % [title]
+    sql = "select * from domestic_Program where title = %s" % [title]
     cur.execute(sql)
     fetch_result = cur.fetchone()
     conn.close()
@@ -102,7 +102,7 @@ def fetchDomesticProgramInfoFromDB(title, column_name):
 def fetchInternationalProgramInfoFromDB(title, column_name):
     conn = mysql_connection()
     cur = conn.cursor(pymysql.cursors.DictCursor)
-    sql = "select * from international_Program where title = %S" % [title]
+    sql = "select * from international_Program where title = %s" % [title]
     cur.execute(sql)
     fetch_result = cur.fetchone()
     conn.close()
