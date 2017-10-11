@@ -212,9 +212,9 @@ def process_request(intent_type, parameter, original_question, context):
     if intent_type == 'ProgramOverview_Domestic':
         title, result = fetchDomesticProgramOverview(parameter)
         if result is None:
-            result == 'Sorry, the answer is not available.'
+            result = 'Sorry, the answer is not available.'
             return result
-        else:
+        if result is not None:
             return result
     elif intent_type == 'ProgramOverview_International':
         title, result = fetchInternationalProgramOverview(parameter)
