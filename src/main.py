@@ -203,7 +203,7 @@ def process_general_question(original_question):
     keyword = keyword_extraction(original_question)
     result = fetchInfoFromDB('generalQA', 'answer', 'question', original_question)
     if result is None:
-        result = keyword_comparision(keyword, all_keywords, all_general_question)
+        result = keyword_comparision(keyword, all_keywords, all_general_questions)
     else:
         result = result
     return result
