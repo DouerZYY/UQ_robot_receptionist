@@ -212,31 +212,22 @@ def process_request(intent_type, parameter, original_question, context):
     if intent_type == 'ProgramOverview_Domestic':
         title, result = fetchDomesticProgramOverview(parameter)
         if result is None:
-            result = 'Sorry, the answer is not available.'
-            return result
-        if result is not None:
-            return result
+            result = 'Sorry, the answer is not available'
+        return result
     elif intent_type == 'ProgramOverview_International':
         title, result = fetchInternationalProgramOverview(parameter)
-        if result is not None:
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
-            return result
+        return result
     elif intent_type == 'DefaultFallbackIntent':
         result = process_general_question(original_question)
         return result
     elif intent_type == 'QAofUQ':
         result = process_general_question(original_question)
-        if result is not None:
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        return result
     elif intent_type == 'ProgramRequirement_Domestic':
         title, result = fetchDomesticProgramEntryRequirement(parameter)
         if result is not None:
             result = 'The entry requirements of ' + title + ' is: ' + result
-            return result
+        return result
         else:
             result == 'Sorry, the answer is not available.'
     elif intent_type == 'ProgramRequirement_International':
