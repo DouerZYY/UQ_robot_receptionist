@@ -82,7 +82,6 @@ def keyword_comparision(user_query_keyword, general_question_keyword, dataset):
 def getValueFromJsonParameter(parameter):
     for key in parameter.keys():
         if parameter[key].encode('ASCII') != '':
-            print(parameter[key])
             return parameter[key]
     return None
 
@@ -90,7 +89,7 @@ def getValueFromJsonParameter(parameter):
 def fetchDomesticProgramInfoFromDB(title, column_name):
     conn = mysql_connection()
     cur = conn.cursor(pymysql.cursors.DictCursor)
-    sql = "select * from domestic_Program where title = %s" % [title]
+    sql = "select * from domestic_Program where title = '%s'" % (title)
     cur.execute(sql)
     fetch_result = cur.fetchone()
     conn.close()
@@ -102,7 +101,7 @@ def fetchDomesticProgramInfoFromDB(title, column_name):
 def fetchInternationalProgramInfoFromDB(title, column_name):
     conn = mysql_connection()
     cur = conn.cursor(pymysql.cursors.DictCursor)
-    sql = "select * from international_Program where title = %s" % [title]
+    sql = "select * from international_Program where title = '%s'" % (title)
     cur.execute(sql)
     fetch_result = cur.fetchone()
     conn.close()
@@ -127,7 +126,6 @@ def fetchAllDataFromDB(table_name):
 def fetchInfoFromDB(table_name, column_name, filter_name, filter_value):
     conn = mysql_connection()
     cur = conn.cursor(pymysql.cursors.DictCursor)
-    print(filter_value)
     sql = "select * from %s where %s = '%s'" % (table_name, filter_name, filter_value)
     cur.execute(sql)
     fetch_result = cur.fetchone()
@@ -211,10 +209,10 @@ def process_general_question(original_question):
 
 # switch to the function according to
 def process_request(intent_type, parameter, original_question, context):
-    if intent_type == 'ProgramInfo_Domestic':
+    if intent_type == 'ProgramOverview_Domestic':
         title, result = fetchDomesticProgramOverview(parameter)
         return result
-    elif intent_type == 'ProgramInfo_International':
+    elif intent_type == 'ProgramOverview_International':
         title, result = fetchInternationalProgramOverview(parameter)
         return result
     elif intent_type == 'DefaultFallbackIntent':
@@ -237,6 +235,7 @@ def process_request(intent_type, parameter, original_question, context):
         title, result = fetchDomesticProgramFee(parameter)
         if result is not None:
             result = 'The cost of ' + title + ' is: ' + result + ' dollar per year'
+        return result
     elif intent_type == 'ProgramFee_International':
         title, result = fetchInternationalProgramFee(parameter)
         if result is not None:
@@ -303,22 +302,19 @@ def make_app():
         (r"/", MainHandler),
     ])
 
-'''
 def prepare_keyword():
     for row in all_general_questions:
         keywords = row['keyword'].split(',')
         processed_keywords = []
         for keyword in keywords:
             keyword = lemmatizer.lemmatize(keyword)
-            print(keyword)
             processed_keywords.append(keyword)
         all_keywords.append(processed_keywords)
-'''
 
 
 all_general_questions = fetchAllDataFromDB('generalQA')
 all_keywords = []
-#prepare_keyword()
+prepare_keyword()
 
 
 if __name__ == "__main__":
