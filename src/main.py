@@ -211,16 +211,16 @@ def process_general_question(original_question):
 def process_request(intent_type, parameter, original_question, context):
     if intent_type == 'ProgramOverview_Domestic':
         title, result = fetchDomesticProgramOverview(parameter)
-        if result is not None:
-            return result
-        else:
-            result == 'Sorry, the answer is not available.'
+        if result is None:
+            return == 'Sorry, the answer is not available.'
+        return result
     elif intent_type == 'ProgramOverview_International':
         title, result = fetchInternationalProgramOverview(parameter)
         if result is not None:
             return result
         else:
             result == 'Sorry, the answer is not available.'
+            return result
     elif intent_type == 'DefaultFallbackIntent':
         result = process_general_question(original_question)
         return result
