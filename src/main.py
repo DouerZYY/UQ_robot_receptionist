@@ -214,7 +214,7 @@ def process_request(intent_type, parameter, original_question, context):
         if result is not None:
             return result
         elif result is None:
-            result == 'Sorry, the answer is not available.'
+            result = 'Sorry, the answer is not available.'
             return result
     elif intent_type == 'ProgramOverview_International':
         title, result = fetchInternationalProgramOverview(parameter)
