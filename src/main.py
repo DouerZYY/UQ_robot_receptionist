@@ -244,12 +244,12 @@ def process_request(intent_type, parameter, original_question, context):
     elif intent_type == 'ProgramFaculty_Domestic':
         title, result = fetchDomesticProgramFaculty(parameter)
         if result is not None:
-            result = 'The duration of ' + title + ' is: ' + result
+            result = 'The faculty of ' + title + ' is: ' + result
         return result
     elif intent_type == 'ProgramFaculty_International':
         title, result = fetchInternationalProgramFaculty(parameter)
         if result is not None:
-            result = 'The duration of ' + title + ' is: ' + result
+            result = 'The faculty of ' + title + ' is: ' + result
         return result
     elif intent_type == 'ProgramDuration_Domestic':
         title, result = fetchDomesticProgramDuration(parameter)
